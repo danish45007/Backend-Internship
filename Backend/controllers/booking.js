@@ -3,7 +3,7 @@ const Booking = require("../models/booking");
 
 // Get booking
 exports.getBooking = (req,res) => {
-    Booking.find().exec((err,booking) => {
+    Booking.find().populate("user", "_id name").exec((err,booking) => {
         if(err) {
             return res.status(400).json({
                 "Error": "No booking found in DB"
@@ -20,6 +20,7 @@ exports.createBooking = (req,res) => {
     const booking = new Booking(req.body);
     booking.save((err, booking) => {
         if(err) {
+            console.log(err)
             return res.status(400).json({
                 "Error": "Unable to create booking at this moment"
             })

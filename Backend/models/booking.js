@@ -3,10 +3,12 @@ const { ObjectId } = mongoose.Schema
 
 
 var bookingSchema = mongoose.Schema({
-    userdetails: {
-        type: ObjectId,
-        ref: "User"
+    userinfo: {
+        name: String,
+        address: String,
+        phonenumber: Number,
     },
+    
     bookingdate: {
         type: Date
     },

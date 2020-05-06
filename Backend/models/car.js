@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var carSchema = mongoose.Schema({
     number: {
-        type: Number,
+        type: String,
         trim: true,
         required: true
     },
@@ -24,7 +24,7 @@ var carSchema = mongoose.Schema({
         tim: true,
         required: true
     }
-});
+},{timestamps:true});
 
 module.exports = mongoose.model("Car",carSchema);
 

@@ -1,29 +1,27 @@
 const User =  require("../models/user");
 
 
-
-exports.getUser = (req,res) => {
-    User.find().exec((err,user) => {
-        if(err){
+exports.getUserById = (req, res, next, id) => {
+    User.findById(id).exec((err,user) => {
+        if (err ||  ! user) {
             return res.status(400).json({
-                "message": "Unable to get users"
-            })
-        }
-        return res.json(user)
-    }) 
-};
-
-exports.createUser = (req,res) => {
-    const user = new User(req.body);
-    console.log(req.body)
-    user.save((err,user) => {
-        if(err) {
-            return res.status(400).json({
-                error: "Category not created in DB"
+                error: "No user was found in DB"
             });
         }
-        return res.json(user);
-        
+        req.profile = user
+        next();
     });
-};
-    
+};                                                                                                                                                                                                                                                                                  
+
+// Get User by Id
+exports.getUser = (req,res) => {
+    req.profile.salt = undefined;
+    req.profile.ecrypt_password = undefined;
+    return res.json(req.profile)
+}
+
+
+
+
+
+

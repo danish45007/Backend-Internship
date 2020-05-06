@@ -10,12 +10,8 @@ exports.getCar = (req,res) => {
         return res.json(car)
     })
 }
-
-
-
-
       
- // Post a car info
+// Post a car info
 
 exports.createcar = (req,res) => {
     const car = new Car(req.body);

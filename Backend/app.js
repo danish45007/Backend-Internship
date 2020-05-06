@@ -1,14 +1,18 @@
-// imports
-const mongoose = require("mongoose");
-const express = require("express");
+// Import's
 require('dotenv').config();
-const bodyParser = require('body-parser')
+const mongoose = require('mongoose');
+const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 // Exporting Routes
 const userRoute = require("./routes/user")
 const carRoute = require("./routes/car")
 const bookingRoute = require("./routes/booking")
+const authRoute = require("./routes/auth")
+
 
 
 
@@ -25,6 +29,9 @@ mongoose.connect(process.env.DATABASE, {
 
 // Middlewares
 app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(cors());    
+
 
 
 // Using Route
@@ -32,6 +39,7 @@ app.use(bodyParser.json());
 app.use("/api",userRoute);
 app.use("/api",carRoute);
 app.use("/api",bookingRoute);
+app.use("/api",authRoute);
 
 
 
