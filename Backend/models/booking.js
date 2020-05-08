@@ -2,11 +2,26 @@ var mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema
 
 
-var bookingSchema = mongoose.Schema({
-    userinfo: {
-        name: String,
-        address: String,
-        phonenumber: Number,
+
+const ProductCartSchema = new mongoose.Schema({
+    product: {
+        type: ObjectId,
+        ref: "Car"
+    },
+    number: String,
+    rent: Number,
+});
+const ProductCart = mongoose.model("ProductCart",ProductCartSchema)
+
+
+
+
+var BookingSchema = mongoose.Schema({
+    products: [ProductCartSchema],
+
+    user: {
+        type: ObjectId,
+        ref: "User"
     },
     
     bookingdate: {
@@ -18,5 +33,5 @@ var bookingSchema = mongoose.Schema({
 
 },{timestamps: true});
 
-module.exports = mongoose.model("Booking",bookingSchema);
+module.exports = mongoose.model("Booking",BookingSchema);
 

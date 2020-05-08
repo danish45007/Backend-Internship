@@ -42,10 +42,6 @@ app.use("/api",bookingRoute);
 app.use("/api",authRoute);
 
 
-
-
-
-
 // PORT
 const port = process.env.PORT || 8000;
 
